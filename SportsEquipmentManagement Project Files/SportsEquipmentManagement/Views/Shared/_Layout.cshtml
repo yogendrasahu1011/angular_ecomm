@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - The Invincibles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/css/mdb.min.css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="/node_modules/core-js/client/shim.min.js"></script>
+    <script src="/node_modules/zone.js/dist/zone.js"></script>
+    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="/systemjs.config.js"></script>
+    <script src="~/Scripts/login.component.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <style>
+        body {
+            padding-top: 0;
+        }
+
+        .body-content {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    </style>
+</head>
+<body style="background-image: url('../images/s.jpg');">
+    <div>
+
+        @RenderBody()
+        
+        <footer>
+            <p>&copy; @DateTime.Now.Year - The Invincibles</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

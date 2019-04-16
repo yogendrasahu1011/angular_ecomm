@@ -1,0 +1,85 @@
+﻿<div style="background-color:#808080;min-height: 90vh;">
+    <div>
+        <header-app></header-app>
+    </div>
+
+    <p style="text-align:center; font-size:xx-large;font:600; text-decoration-line:underline">Purchase Order</p>
+
+
+    <div style="border:5px;">
+
+
+        <table align="right" style="width:100%">
+            <tr>
+                <td><b>PO Number:</b></td>
+                <td>{{poNumber}}</td>
+            </tr>
+            <tr>
+                <td><b>Buyer:</b></td>
+                <td>{{Buyer}}</td>
+            </tr>
+            <tr>
+                <td><b>Buyer Contact:</b></td>
+                <td>{{currentUser.Contact}}</td>
+            </tr>
+            <tr>
+                <td><b>Buyer Email:</b></td>
+                <td>{{BuyerUserEmail}}</td>
+            </tr>
+            <tr>
+                <td><b>Supplier:</b></td>
+                <td>{{Supplier}}</td>
+            </tr>
+           
+        </table>
+        <br /><br />
+        <table class="table" align="center" style="width:100%; border:2px solid;    height: 300px;">
+            <thead>
+                <tr>
+                    <td><b>Item Name</b></td>
+                    <td><b>Quantity</b></td>
+                    <td><b>Price ($)</b></td>
+                </tr>
+            </thead>
+            <tbody style="min-height=500px">
+                <tr>
+                    <td>
+                        <textarea value="{{purchaseItemNameList}}" cols="500" rows="500" style="border:hidden;width: 500px;height: 300px;"></textarea>
+
+                    </td>
+                    <td>
+                        <textarea value="{{PurchaseItemquantityList}}" cols="500" rows="500" style="border:hidden;width: 500px;height: 300px;"></textarea>
+
+                    </td>
+                    <td>
+                        <textarea value="{{PurchaseItempriceList}}" cols="500" rows="500" style="border:hidden;width: 500px;height: 300px;"></textarea>
+
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+        <br />
+        <div>
+
+            <table align="right" style="width:50%; border:2px solid;">
+                <tr>
+                    <td>
+                        <b>Total Amount:</b>&nbsp;&nbsp; $ {{Totalamount}}
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </div>
+
+    </div>
+</div>

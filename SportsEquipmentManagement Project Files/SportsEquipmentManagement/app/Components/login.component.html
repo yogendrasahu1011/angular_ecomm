@@ -1,0 +1,169 @@
+﻿<html>
+<head>
+    <link rel="stylesheet" href="../../Content/StyleSheet2.css">
+    <script src="../../Scripts/login.component.js"></script>
+</head>
+<body>
+    <script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
+    <picture>
+       
+        <img src="../../Images/rvm1.jpg" alt="">
+        <svg width="100%" height="1280">
+            <defs>
+                <linearGradient id="gradient" gradientTransform="rotate(75)">
+                    <stop offset="15%" stop-color="#1a237e" />
+                    <stop offset="80%" stop-color="#00e5ff" />
+                </linearGradient>
+                <mask id="mask">
+                    <rect width="100%" height="100%" fill="#fff" />
+                    <text x="10%" y="15%" font-size="4em" font-weight="300">THE INVINCIBLES </text>
+                    <text x="10%" y="25%" font-size="4em" font-weight="300">EXCELLENCE IS NOT A HABIT </text>
+                    <text x="10%" y="32%" font-size="4em" font-weight="300"> IT'S AN ATTITUDE FOR US</text>
+                    <text x="10%" y="55%" font-size="10em"
+                          letter-spacing="10">LET'S PLAY</text>
+                </mask>
+            </defs>
+            <rect width="100%" height="100%" fill-opacity="0.8" mask="url(#mask)" />
+        </svg>
+    </picture>
+
+   
+        <article>
+            <h1>Follow us at</h1>
+            <ul>
+                <li>
+                    <a href="https://www.facebook.com/Invincible-Store-1652945321393662/"><img src="../../Images/Facebook.png" alt="" width="60" height="60"></a>
+                    <h2>Facebook</h2>
+                <li>
+                    <a href="https://twitter.com/theinvinciblesl"><img src="../../Images/twitter.png" alt="" width="60" height="60"></a>
+                    <h2>Twitter</h2>
+                <li>
+                    <a href="https://www.instagram.com/theinvinciblesforiad/"><img src="../../Images/instagram.png" alt="" width="60" height="60"></a>
+                    <h2>Instagram</h2>
+</ul>
+        </article>
+    
+
+
+    
+    <div class='panel panel-primary loginCss' style="position: absolute;bottom: 30%;right: 24%;height: 30%;border:none;">
+
+        <div>
+            <div>
+
+                <table>
+                    <tr>
+                        <th><label for="username">Username</label></th>
+                        <th><input #username type="text" size="20" name="username" required /></th>
+                    </tr>
+                    <tr>
+                        <th><label for="password">Password</label></th>
+                        <th><input #password type="password" size="20" name="password" required /></th>
+                    </tr>
+
+
+                </table>
+                <button (click)="login(username.value,password.value)"><span style="color:#428bca;font-weight: 510;">LOGIN</span></button>
+                <button (click)="addRegister()"><span style="color:#428bca;font-weight: 510;">REGISTER</span></button>
+                <p>{{clickMessage}}</p>
+                <p>{{msg}}</p>
+                <section>                  
+                    <a href="forgotpassword">Forgot Password?</a>
+                </section>
+            </div>
+        </div>
+    </div>
+      
+
+
+    <modal #modal>
+        <form novalidate (ngSubmit)="onSubmit(registerFrm)" [formGroup]="registerFrm">
+            <modal-header [show-close]="true">
+                <h4 class="modal-title">{{modalTitle}}</h4>
+            </modal-header>
+            <modal-body>
+
+                <div class="form-group">
+                    <div>
+                        <span>First name*</span>
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="FirstName">
+                    </div>
+                    <div>
+                        <span>Last name</span>
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName">
+                    </div>
+                    <div>
+                        <span>DOB</span>
+                        <input type="date" class="form-control" placeholder="DOB" formControlName="DOB">
+                    </div>
+                    <div>
+                        <span>Contact*</span>
+                        <input type="text" class="form-control" placeholder="Contact" formControlName="Contact">
+                    </div>
+                    <div>
+                        <span>Email*</span>
+                        <input id="email_field" type="text" class="form-control" onchange="emailCheck()" placeholder="Email" formControlName="Email">
+                        <section id="email_message" style="color:red"> </section>
+                    </div>
+                    <div>
+                        <span>Username*</span>
+                        <input type="text" class="form-control" placeholder="Username" formControlName="Username">
+                    </div>
+                    <div>
+                        <span>Password*</span>
+                        <input id="pass1" type="password" class="form-control" placeholder="Password" formControlName="Password">
+                    </div>
+                    <div>
+                        <span>Confirm Password*</span>
+                        <input id="pass2" type="password" class="form-control" onchange="passMatch()" placeholder="Must match with above Password" formControlName="ConfirmPassword">
+                    </div>
+                    <div>
+                        <span>SecurityQuestion</span>
+                        <select formControlName="SecurityQuestion" class="form-control">
+                            <option>Whats your Favourite Color?</option>
+                            <option>What was your place of birth?</option>
+                            <option>What is your mothers maiden name?</option>
+                            <option>What is the name of favourite teacher?</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>SecurityAnswer</span>
+                        <input type="text" class="form-control" placeholder="Security Answer" formControlName="SecurityAnswer">
+                    </div>
+                    <div>
+                        <span>Company*</span>
+                        <select formControlName="Company" class="form-control">
+                            <option>Adidas</option>
+                            <option>ESPN</option>
+                            <option>Gatorade</option>
+                            <option>Jordan</option>
+                            <option>Nike</option>
+                            <option>point4</option>
+                            <option>Puma</option>
+                            <option>Reebok</option>
+                            <option>Umbro</option>
+                            <option>Under Armour</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>Role*</span>
+                        <select formControlName="Role" class="form-control">
+                            <option>Buyer</option>
+                            <option>Seller</option>
+                            <option>Buyer Admin</option>
+                            <option>Seller Admin</option>
+                        </select>
+                    </div>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <div>
+                    <a class="btn btn-default" (click)="modal.dismiss()" onclick="AddCan()">Cancel</a>
+                    <button id="btn_Add" type="submit" [disabled]="registerFrm.invalid" class="btn btn-primary" style="display:none">{{modalBtnTitle}}</button>                  
+                </div>
+            </modal-footer>
+        </form>
+    </modal>
+
+</body>
+</html>

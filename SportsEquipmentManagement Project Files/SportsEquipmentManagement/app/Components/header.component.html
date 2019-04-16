@@ -1,0 +1,84 @@
+﻿<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: #ff6f00;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            li a:hover:not(.active) {
+                background-color: #ff7b00;
+            }
+
+    .active {
+        background-color: #4CAF50;
+    }
+
+    div.cities {
+        background-color: green;
+        color: black;
+        margin: 20px;
+        padding: 20px;
+    }
+
+    span.note {
+        font-size: 120%;
+        color: red;
+    }
+
+    ul#menu li {
+        display: inline;
+    }
+
+    ul#menu1 li {
+        display: inline;
+    }
+
+        ul#menu1 li a {
+            background-color: #dddddd;
+            color: #ff6f00;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+            ul#menu1 li a:hover {
+                background-color: #044587;
+                color: #fff;
+                transition: all 0.5s ease;
+                -webkit-transition: all 0.5s ease;
+                -moz-transition: all 0.5s ease;
+            }
+
+
+</style>
+<div>
+    <nav>
+        <div>
+            <ul id="menu1">
+                <li><a routerLink="/user">User</a></li>
+                <li><a routerLink="/product">Products</a></li>
+                <li><a routerLink="/company">Company</a></li>        
+                <li style="float:right"><a routerLink="/logout"><img src="../../images/lo.png" width="25" height="20"></a></li>
+                <li style="float:right"><img src="../../images/user.png" width="40" height="40"><span style="font-weight:600;font-size:20px;margin-right:4px;color:#ff6f00;"> Hi ! {{currentUser.FirstName}}</span></li>
+                
+                
+            </ul>
+        </div>
+    </nav>
+    <div class='container'>
+        <router-outlet></router-outlet>
+    </div>
+</div>

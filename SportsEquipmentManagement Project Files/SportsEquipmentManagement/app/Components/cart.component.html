@@ -1,0 +1,97 @@
+﻿<div>
+    <div>
+        <header-app></header-app>
+    </div>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            Shopping Cart
+        </div>
+        <div class='panel-body'>
+            <div class='table-responsive' style="float:left;width:79%">
+                <!--<div style="padding-bottom:10px"><button class="myButton" (click)="addUser()">Continue Shopping</button></div>-->
+                <div class="alert alert-info" role="alert" *ngIf="indLoading"></div>
+                <div *ngIf='users && users.length==0' class="alert alert-info" role="alert">No record found!</div>
+
+                <table class='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>SubTotal</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td><img src={{product.ImagePath}} alt="Placholder Image 2" height="40">{{product.MaterialID}}</td>
+                            <td>{{product.Price}}</td>
+                            <td><input type="text" style="max-width: 50px;" id="productQuantity{{product.Id}}" name="productQuantity{{product.Id}}" value="{{product.quantity}}" disabled></td>
+                            <td>{{product.Price * product.quantity}}</td>
+                            <td>
+                                <button id="editBtn{{product.Id}}" title="Edit" class="btn btn-editAdd" (click)="editCart(product.Id)"><img src="../../images/edit1.png" height="25" /></button>
+                                <button id="updateBtn{{product.Id}}" title="Update" class="btn btn-editAdd" (click)="updateCart(product.Id)" style="display:none">Update</button>
+                            </td>
+                            <td>
+                                <button title="Delete" class="btn btn-editAdd" (click)="deleteCart(product.Id)"><img src="../../images/deleteBtn.png" height="25" /></button>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                </div>
+            </div>
+            <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+            <div class='table-responsive' style="float:right;width:21%">
+
+
+                <table class='table table-striped' border="1">
+                    <thead>
+                        <tr style="color:brown;">
+                            <th><b>Summary</b></th>
+                        </tr>
+                    </thead>
+                    <tbody style="color:brown;">
+                        <tr>
+                            <td>
+                                <b>Sub Total:</b>
+                                <input type="text" value="{{subtotal}}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Tax(4%):</b>
+                                <input type="text" value="{{cartTax}}" disabled />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <b>Grand Total:</b>
+                                <input type="text" value="{{grandTotal}}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button title="Checkout" class="btn btn-default" (click)="checkout()">Checkout</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <!--//<button class="checkout">Checkout</button>-->
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

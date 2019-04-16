@@ -1,0 +1,17 @@
+﻿<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
+<div>
+    <div>
+        <header-app></header-app>
+    </div>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            Purchase Order
+        </div>
+        <div class='panel-body'>
+            <h1>Congratulations !! Your order <b style="color:red">{{poNumber}}</b> has been successfully placed.</h1>
+            
+            <button title="Checkout" class="btn btn-default" (click)="generatePDF()">Generate PDF</button>
+
+        </div>
+    </div>
+</div>

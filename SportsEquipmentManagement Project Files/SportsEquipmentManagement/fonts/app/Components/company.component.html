@@ -1,0 +1,146 @@
+﻿<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
+
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <b>Company Management</b>
+    </div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div>
+                <search-list [title]='searchTitle' (change)="criteriaChange($event)"></search-list>
+            </div>
+            <div style="padding-bottom:10px"><button class="btn btn-primary" (click)="addCompany()"><img src="../../images/EditBtn.png" height="40" /></button></div>
+            <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+            <div *ngIf='company && companies.length==0' class="alert alert-info" role="alert">No record found!</div>
+            <table class='table table-striped' *ngIf='companies && companies.length'>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Owner</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>DUNS</th>
+                        <th>Type</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let company of companies| companyFilter:listFilter">
+                        <td>{{company.Name}}</td>
+                        <td>{{company.Email}}</td>
+                        <td>{{company.Phone}}</td>
+                        <td>{{company.Owner}}</td>
+                        <td>{{company.Street}}</td>
+                        <td>{{company.City}}</td>
+                        <td>{{company.State}}</td>
+                        <td>{{company.Country}}</td>
+                        <td>{{company.DUNS}}</td>
+                        <td>{{company.Type}}</td>
+                        <td>
+                            <button title="Edit" class="btn btn-editAdd" (click)="editCompany(company.CompanyId)"><img src="../../images/edit1.png" height="25" /></button>
+                        </td>
+                        <td>
+                            <button title="Delete" class="btn btn-editAdd" (click)="deleteCompany(company.CompanyId)"><img src="../../images/deleteBtn.png" height="25" /></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+            </div>
+        </div>
+        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+        </div>
+    </div>
+</div>
+
+<modal #modal>
+    <form novalidate (ngSubmit)="onSubmit(companyFrm)" [formGroup]="companyFrm">
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">{{modalTitle}}</h4>
+        </modal-header>
+        <modal-body>
+
+            <div class="form-group">
+                <div>
+                    <span>Name*</span>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="Name">
+                </div>
+                <div>
+                    <span>Email</span>
+                    <input type="text" class="form-control" placeholder="Email" formControlName="Email">
+                </div>
+                <div>
+                    <span>Phone</span>
+                    <input type="text" class="form-control" placeholder="Phone" formControlName="Phone">
+                </div>
+                <div>
+                    <span>Owner</span>
+                    <input type="text" class="form-control" placeholder="Owner" formControlName="Owner">
+                </div>
+                <div>
+                    <span>Street</span>
+                    <input type="text" class="form-control" placeholder="Street" formControlName="Street">
+                </div>
+                <div>
+                    <span>City</span>
+                    <input type="text" class="form-control" placeholder="City" formControlName="City">
+                </div>
+                <div>
+                    <span>DUNS</span>
+                    <input type="text" class="form-control" placeholder="DUNS" formControlName="DUNS">
+                </div>
+                <div>
+                    <span>Type*</span>
+                    <select formControlName="Type" class="form-control">
+                        <option>Seller</option>
+                        <option>Buyer</option>
+
+                    </select>
+                </div>
+                <div>
+                    <span>State*</span>
+                    <select formControlName="State" class="form-control">
+                        <option>Texas</option>
+                        <option>New York</option>
+                        <option>California</option>
+                        <option>Washinton</option>
+                        <option>New Jersey</option>
+                        <option>Oregon</option>
+                        <option>Georgia</option>
+                        <option>Florida</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Country*</span>
+                    <select formControlName="Country" class="form-control">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                        <option>China</option>
+                        <option>India</option>
+                        <option>France</option>
+                        <option>United Kingdom</option>
+                        <option>Spain</option>
+                        <option>Italy</option>
+                    </select>
+                </div>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <div>
+                <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+                <button type="submit" [disabled]="companyFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+            </div>
+        </modal-footer>
+
+    </form>
+</modal>

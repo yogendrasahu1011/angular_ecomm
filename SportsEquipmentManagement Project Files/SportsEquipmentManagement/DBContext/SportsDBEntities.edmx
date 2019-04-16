@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SportsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblCompany">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="250" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="250" />
+          <Property Name="Street" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="250" />
+          <Property Name="State" Type="nvarchar" MaxLength="250" />
+          <Property Name="Country" Type="nvarchar" MaxLength="250" />
+          <Property Name="DUNS" Type="nvarchar" MaxLength="9" />
+          <Property Name="Type" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TblPO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PONumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Buyer" Type="nvarchar" MaxLength="250" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="250" />
+          <Property Name="BuyerUserID" Type="nvarchar" MaxLength="250" />
+          <Property Name="BuyerUserEmail" Type="nvarchar" MaxLength="30" />
+          <Property Name="PurchaseItemNameList" Type="nvarchar" MaxLength="250" />
+          <Property Name="PurchaseItemquantityList" Type="nvarchar" MaxLength="250" />
+          <Property Name="PurchaseItempriceList" Type="nvarchar" MaxLength="250" />
+          <Property Name="Totalamount" Type="real" />
+        </EntityType>
+        <EntityType Name="TblProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialID" Type="nvarchar" MaxLength="40" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Price" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="Inventory" Type="int" />
+          <Property Name="SupplierCompany" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Username" Type="nvarchar" MaxLength="30" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="30" />
+          <Property Name="SecurityQuestion" Type="nvarchar" MaxLength="800" />
+          <Property Name="SecurityAnswer" Type="nvarchar" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="SportsDBModelStoreContainer">
+          <EntitySet Name="TblCompany" EntityType="Self.TblCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPO" EntityType="Self.TblPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProduct" EntityType="Self.TblProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUser" EntityType="Self.TblUser" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SportsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblCompany">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DUNS" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialID" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="Inventory" Type="Int32" />
+          <Property Name="ImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierCompany" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityQuestion" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityAnswer" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SportsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblCompanies" EntityType="Self.TblCompany" />
+          <EntitySet Name="TblProducts" EntityType="Self.TblProduct" />
+          <EntitySet Name="TblUsers" EntityType="Self.TblUser" />
+          <EntitySet Name="TblPOes" EntityType="SportsDBModel.TblPO" />
+        </EntityContainer>
+        <EntityType Name="TblPO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PONumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Buyer" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerUserID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerUserEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseItemNameList" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseItemquantityList" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseItempriceList" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Totalamount" Type="Single" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SportsDBModelStoreContainer" CdmEntityContainer="SportsDBEntities">
+          <EntitySetMapping Name="TblCompanies">
+            <EntityTypeMapping TypeName="SportsDBModel.TblCompany">
+              <MappingFragment StoreEntitySet="TblCompany">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="DUNS" ColumnName="DUNS" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProducts">
+            <EntityTypeMapping TypeName="SportsDBModel.TblProduct">
+              <MappingFragment StoreEntitySet="TblProduct">
+                <ScalarProperty Name="SupplierCompany" ColumnName="SupplierCompany" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Inventory" ColumnName="Inventory" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUsers">
+            <EntityTypeMapping TypeName="SportsDBModel.TblUser">
+              <MappingFragment StoreEntitySet="TblUser">
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+                <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPOes">
+            <EntityTypeMapping TypeName="SportsDBModel.TblPO">
+              <MappingFragment StoreEntitySet="TblPO">
+                <ScalarProperty Name="Totalamount" ColumnName="Totalamount" />
+                <ScalarProperty Name="PurchaseItempriceList" ColumnName="PurchaseItempriceList" />
+                <ScalarProperty Name="PurchaseItemquantityList" ColumnName="PurchaseItemquantityList" />
+                <ScalarProperty Name="PurchaseItemNameList" ColumnName="PurchaseItemNameList" />
+                <ScalarProperty Name="BuyerUserEmail" ColumnName="BuyerUserEmail" />
+                <ScalarProperty Name="BuyerUserID" ColumnName="BuyerUserID" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+                <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

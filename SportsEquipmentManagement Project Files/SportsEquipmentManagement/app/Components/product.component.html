@@ -1,0 +1,122 @@
+﻿<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
+<div>
+    <div>
+        <header-app></header-app>
+    </div>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <b>Product Management</b>
+        </div>
+        <div class='panel-body'>
+            <div class='table-responsive'>
+                <div><ul>
+                    <search-list [title]='searchTitle' (change)="criteriaChange($event)"></search-list>
+                    <li *ngIf='currentUser.Role=="Buyer Admin" || currentUser.Role=="Buyer"' style="float:right"><a routerLink="/cart"><span style="font-weight:600;font-size:35px;margin-right:4px;color:red;">{{selectedProducts.length}}</span><img src="../../images/cart_icon.jpg" width="40" height="40"></a></li>
+                     </ul>
+                </div>
+                <br />
+                <div *ngIf='currentUser.Role=="Super Admin" || currentUser.Role=="Seller" || currentUser.Role=="Seller Admin"' style="padding-bottom:10px">
+                    <button class="btn btn-editAdd" (click)="addProduct()"><img src="../../images/EditBtn.png" height="40" /></button>
+                </div>
+                <div *ngIf='currentUser.Role=="Buyer Admin" || currentUser.Role=="Buyer"'>
+                    <button class="btn btn-editAdd" (click)="purchaseProduct()"><img src="../../images/addtocart.jpg" height="40" /></button>
+                </div>
+
+                <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+                <div *ngIf='product && products.length==0' class="alert alert-info" role="alert">No record found!</div>
+                <table class='table table-striped' *ngIf='products && products.length'>
+                    <thead>
+                        <tr>
+                            <th *ngIf='currentUser.Role=="Buyer Admin" || currentUser.Role=="Buyer"'></th>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Inventory</th>
+                            <th>Supplier</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products| productFilter:listFilter">
+                            <td *ngIf='currentUser.Role=="Buyer Admin" || currentUser.Role=="Buyer"'>
+                                <input #checkbox (change)="checkboxChanged(checkbox.value)" value="{{product.Id}}" type="checkbox" />
+                            </td>
+                            <td><img src={{product.ImagePath}} height="80" /></td>
+                            <td>{{product.MaterialID}}</td>
+                            <td>{{product.Description}}</td>
+                            <td>{{product.Price}}</td>
+                            <td>{{product.Inventory}}</td>
+                            <td>{{product.SupplierCompany}}</td>
+                            <td *ngIf='(currentUser.Role=="Super Admin"
+                            || (currentUser.Role=="Seller Admin" && currentUser.Company==product.SupplierCompany) || (currentUser.Role=="Seller" && currentUser.Company==product.SupplierCompany))'>
+                                <button title="Edit" class="btn btn-editAdd" (click)="editProduct(product.Id)"><img src="../../images/edit1.png" height="25" /></button>
+                                <button title="Delete" class="btn btn-danger" (click)="deleteProduct(product.Id)"><img src="../../images/deleteBtn.png" height="25" /></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                </div>
+            </div>
+            <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+        </div>
+    </div>
+</div>
+    <modal #modal>
+        <form novalidate (ngSubmit)="onSubmit(productFrm)" [formGroup]="productFrm">
+            <modal-header [show-close]="true">
+                <h4 class="modal-title">{{modalTitle}}</h4>
+            </modal-header>
+            <modal-body>
+                <div class="form-group">
+                    <div>
+                        <span>Material Id*</span>
+                        <input type="text" class="form-control" placeholder="MaterialID" formControlName="MaterialID">
+                    </div>
+                    <div>
+                        <span>Description*</span>
+                        <input type="text" class="form-control" placeholder="Description" formControlName="Description">
+                    </div>
+                    <div>
+                        <span>Price*</span>
+                        <input type="number" class="form-control" placeholder="Price" formControlName="Price">
+                    </div>
+                    <div>
+                        <span>Inventory*</span>
+                        <input type="number" class="form-control" placeholder="Inventory" formControlName="Inventory">
+                    </div>
+                    <div>
+                        <span>Supplier</span>
+                        <select formControlName="SupplierCompany" class="form-control">
+                            <option>Adidas</option>
+                            <option>ESPN</option>
+                            <option>Gatorade</option>
+                            <option>Jordan</option>
+                            <option>Nike</option>
+                            <option>point4</option>
+                            <option>Puma</option>
+                            <option>Reebok</option>
+                            <option>Umbro</option>
+                            <option>Under Armour</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>Image Name</span>
+                        <input type="text" class="form-control" placeholder="../../images/products/" formControlName="ImagePath">
+                    </div>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <div>
+                    <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+                    <button type="submit" [disabled]="productFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+                </div>
+            </modal-footer>
+        </form>
+    </modal>

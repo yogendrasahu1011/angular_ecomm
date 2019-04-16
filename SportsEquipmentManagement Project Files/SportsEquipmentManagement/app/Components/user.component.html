@@ -1,0 +1,151 @@
+﻿<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
+<script src="../../Scripts/login.component.js"></script>
+<div>
+    <div>
+        <header-app></header-app>
+    </div>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            User Management
+        </div>
+        <div class='panel-body'>
+            <div class='table-responsive'>
+                <div>
+                    <search-list [title]='searchTitle' (change)="criteriaChange($event)"></search-list>
+                </div>
+                <br />
+                <div *ngIf='currentUser.Role=="Super Admin"' style="padding-bottom:10px"><button class="btn btn-editAdd" (click)="addUser()"><img src="../../images/EditBtn.png" height="40" /></button></div>
+                <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+                <div *ngIf='users && users.length==0' class="alert alert-info" role="alert">No record found!</div>
+                <table class='table table-striped' *ngIf='users && users.length'>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date Of Birth</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Role</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let user of users | userFilter:listFilter">
+                        <tr *ngIf='currentUser.Role=="Super Admin"
+                        || (currentUser.Company==user.Company && user.Role=="Buyer" && (currentUser.Role=="Buyer Admin" ||currentUser.Role=="Buyer"))
+                        || (currentUser.Company==user.Company && user.Role=="Seller" && (currentUser.Role=="Seller Admin" || currentUser.Role=="Seller"))
+                        '>
+                            <td>{{user.FirstName}}</td>
+                            <td>{{user.LastName}}</td>
+                            <td>{{user.DOB}}</td>
+                            <td>{{user.Contact}}</td>
+                            <td>{{user.Email}}</td>
+                            <td>{{user.Company}}</td>
+                            <td>{{user.Role}}</td>
+                            <td *ngIf='(currentUser.Role=="Super Admin" || currentUser.Role=="Seller Admin" || currentUser.Role=="Buyer Admin")'>
+                                <button title="Edit" class="btn btn-editAdd" (click)="editUser(user.Id)"><img src="../../images/edit1.png" height="25" /></button>
+                                <button title="Delete" class="btn btn-danger" (click)="deleteUser(user.Id)"><img src="../../images/deleteBtn.png" height="25" /></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                </div>
+            </div>
+            <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{msg}}
+            </div>
+        </div>
+    </div>
+</div>
+<modal #modal>
+    <form novalidate (ngSubmit)="onSubmit(userFrm)" [formGroup]="userFrm">
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">{{modalTitle}}</h4>
+        </modal-header>
+        <modal-body>
+
+            <div class="form-group">
+                <div>
+                    <span>First name*</span>
+                    <input type="text" class="form-control" placeholder="First Name" formControlName="FirstName">
+                </div>
+                <div>
+                    <span>Last name</span>
+                    <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName">
+                </div>
+                <div>
+                    <span>DOB</span>
+                    <input type="date" class="form-control" placeholder="DOB" formControlName="DOB">
+                </div>
+                <div>
+                    <span>Contact*</span>
+                    <input type="text" class="form-control" placeholder="Contact" formControlName="Contact">
+                </div>
+                <div>
+                    <span>Email*</span>
+                    <input id="email_field" type="email" class="form-control" onchange="emailCheck()" placeholder="Email" formControlName="Email">
+                    <section id="email_message" style="color:red"></section>
+                </div>
+                <div>
+                    <span>Username*</span>
+                    <input type="text" class="form-control" placeholder="Username" formControlName="Username">
+                </div>
+                <div>
+                    <span>Password*</span>
+                    <input id="pass1" type="password" class="form-control"  placeholder="Password" formControlName="Password">
+                </div>
+                <div>
+                    <span>Confirm Password*</span>
+                    <input id="pass2"  type="password" class="form-control" onchange="passMatch()" placeholder="Must match with above Password" formControlName="ConfirmPassword">
+                </div>
+                <div>
+                    <span>SecurityQuestion</span>
+                    <select formControlName="SecurityQuestion" class="form-control">
+                        <option>Whats is your Favourite Color?</option>
+                        <option>What was your place of birth?</option>
+                        <option>What is your mothers maiden name?</option>
+                        <option>What is the name of favourite teacher?</option>
+                    </select>
+                </div>
+                <div>
+                    <span>SecurityAnswer</span>
+                    <input type="text" class="form-control" placeholder="Security Answer" formControlName="SecurityAnswer">
+                </div>
+                <div>
+                    <span>Company*</span>
+                    <select formControlName="Company" class="form-control">
+                        <option>Adidas</option>
+                        <option>ESPN</option>
+                        <option>Gatorade</option>
+                        <option>Jordan</option>
+                        <option>Nike</option>
+                        <option>point4</option>
+                        <option>Puma</option>
+                        <option>Reebok</option>
+                        <option>Umbro</option>
+                        <option>Under Armour</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Role*</span>
+                    <select formControlName="Role" class="form-control">
+                        <option>Buyer</option>
+                        <option>Seller</option>
+                        <option>Buyer Admin</option>
+                        <option>Seller Admin</option>
+                    </select>
+                </div>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <div>
+                <a class="btn btn-default" onclick="AddCan()" (click)="modal.dismiss()">Cancel</a>
+                <button id="btn_Add" type="submit" [disabled]="userFrm.invalid"  class="btn btn-primary">{{modalBtnTitle}}</button>
+            </div>
+        </modal-footer>
+    </form>
+</modal>
